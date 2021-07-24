@@ -2,6 +2,7 @@ package com.effx.skyblock;
 
 import com.effx.skyblock.Commands.MainCommand;
 import com.effx.skyblock.Commands.TabComplete;
+import com.effx.skyblock.Events.Events;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.WorldCreator;
@@ -22,6 +23,7 @@ public class Main extends JavaPlugin {
         log.info(ChatColor.AQUA + "활성화!");
         getCommand("esb").setTabCompleter(new TabComplete());
         getCommand("esb").setExecutor(new MainCommand());
+        Bukkit.getPluginManager().registerEvents(new Events(), this);
         setupWorldEdit();
         getServer().createWorld(new WorldCreator("esb_skyblock"));
         log.info(f.getPath());
@@ -46,6 +48,7 @@ public class Main extends JavaPlugin {
     private void makeFile(File f) {
         if (!getDataFolder().exists()) {
             getDataFolder().mkdir();
+            new File(getDataFolder().getPath() + "/users").mkdir();
         }
         if (!f.exists() || !f.isFile()) {
             try {

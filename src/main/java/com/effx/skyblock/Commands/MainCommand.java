@@ -1,5 +1,6 @@
 package com.effx.skyblock.Commands;
 
+import com.effx.skyblock.Data.Files;
 import com.effx.skyblock.Utils.Utils;
 import com.effx.skyblock.World.Create_World;
 import com.effx.skyblock.World.Schemetic;
@@ -54,6 +55,17 @@ public class MainCommand implements CommandExecutor {
                 }
                 case "make" -> {
                     try {
+                        Files files = new Files();
+                        File userFile = new File(plugin.getDataFolder(), "/users/" + p.getUniqueId() + ".json");
+                        if (!userFile.exists() || !userFile.isFile()) {
+                            try {
+                                userFile.createNewFile();
+                            } catch (IOException ioException) {
+                                ioException.printStackTrace();
+                            }
+                        }
+
+
                         Schemetic schemetic = new Schemetic();
                         InputStream is = getClass().getResourceAsStream("/skyblock.schem");
                         File tmp;
