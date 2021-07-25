@@ -7,7 +7,6 @@ public class User {
     private double x;
     private double y;
     private double z;
-    private int order;
     private boolean hasIsland = false;
 
     public UUID getUuid() {
@@ -42,14 +41,6 @@ public class User {
         this.z = z;
     }
 
-    public int getOrder() {
-        return order;
-    }
-
-    public void setOrder(int order) {
-        this.order = order;
-    }
-
     public boolean isHasIsland() {
         return hasIsland;
     }
@@ -59,12 +50,11 @@ public class User {
     }
 
 
-    public User(UUID uuid, double x, double y, double z, int order, boolean hasIsland) {
+    public User(UUID uuid, double x, double y, double z, boolean hasIsland) {
         this.uuid = uuid;
         this.x = x;
         this.y = y;
         this.z = z;
-        this.order = order;
         this.hasIsland = hasIsland;
     }
 }

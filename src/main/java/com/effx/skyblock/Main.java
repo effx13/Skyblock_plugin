@@ -10,11 +10,10 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 public class Main extends JavaPlugin {
-    private final File f = new File(getDataFolder(), "/data.txt");
+    private final File f = new File(getDataFolder().getPath());
     public static Logger log = Logger.getLogger("Minecraft");
     public ConsoleCommandSender console = Bukkit.getConsoleSender();
 
@@ -25,8 +24,9 @@ public class Main extends JavaPlugin {
         getCommand("esb").setExecutor(new MainCommand());
         Bukkit.getPluginManager().registerEvents(new Events(), this);
         setupWorldEdit();
-        getServer().createWorld(new WorldCreator("esb_skyblock"));
-        log.info(f.getPath());
+        if (Bukkit.getWorld("esb_skyblock") != null) {
+            getServer().createWorld(new WorldCreator("esb_skyblock"));
+        }
         makeFile(f);
     }
 
@@ -49,13 +49,6 @@ public class Main extends JavaPlugin {
         if (!getDataFolder().exists()) {
             getDataFolder().mkdir();
             new File(getDataFolder().getPath() + "/users").mkdir();
-        }
-        if (!f.exists() || !f.isFile()) {
-            try {
-                f.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

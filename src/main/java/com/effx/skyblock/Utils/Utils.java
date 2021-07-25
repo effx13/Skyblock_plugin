@@ -1,9 +1,7 @@
 package com.effx.skyblock.Utils;
 
-import org.bukkit.entity.Player;
-
 public class Utils {
-    public int[] GenerateXY(Player player, int playerNum) {
+    public int[] GenerateXY(int playerNum) {
         boolean goingUp = false;
         boolean goingPlus = true;
         int weight = 150;
@@ -11,7 +9,6 @@ public class Utils {
 
         int x = 0, y = 0;
 
-        player.sendMessage("player: " + playerNum);
 
         while (playerNum > 0) {
             int went = 0;
@@ -19,7 +16,6 @@ public class Utils {
                 if (playerNum <= 0) {
                     break;
                 }
-                player.sendMessage(x + ", " + y);
                 playerNum -= 1;
 
                 went += weight;
